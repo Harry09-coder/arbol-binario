@@ -16,6 +16,15 @@ Nodo *nuevoNodo(int valor) {
 }
 
 //prototipos de funciones
+//insertar
+
+//preorden
+
+//inorden
+
+//postorden
+
+//mostrar
 int main(){
 
 return 0;
