@@ -20,7 +20,7 @@ Nodo *nuevoNodo(int valor) {
 
 //prototipos de funciones
 //insertar
-void insertarnodo()
+void insertarnodo(nodo *& arbol, int n)
 
 //preorden
 void PreOrden(nodo *arbol){
