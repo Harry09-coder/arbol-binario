@@ -71,3 +71,20 @@ void menu() {
 
     } while (opcion != 3);
 }
+// Definición de insertar elementos en un árbol
+void insertarnodo(nodo *& arbol, int n) {
+    if (arbol == NULL) { // si el arbol está vacío
+        nodo *nuevo_nodo = crearnodo(n);
+        arbol = nuevo_nodo;
+    }
+    else{ // si el árbol tiene un nodo o más
+        int valorRaiz = arbol->dato; // obtenemos el valor de la raíz
+        if (n < valorRaiz){ // si el elemento es menor a la raíz, insertamos en izq
+            insertarnodo(arbol->izq, n);
+        }
+        else{// si el elemento es mayor a la raíz, insertamos en der
+            insertarnodo(arbol->der, n);
+        }
+    }
+}
+
