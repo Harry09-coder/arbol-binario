@@ -3,6 +3,9 @@ using namespace std;
 
 struct Nodo {
     int dato;
+    string nombre;
+    char genero; // M y F
+    int Generacion;
     Nodo *izq;
     Nodo *der;
 };
