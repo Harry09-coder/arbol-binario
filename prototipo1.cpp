@@ -46,7 +46,15 @@ void inOrden(Nodo *arbol){
 
 
 //postorden
-
+void PostOrden(nodo *arbol){
+	if(arbol == NULL){
+		return ;
+	}else{
+		PostOrden(arbol->izq);
+		PostOrden(arbol->der);
+		cout<<arbol->dato<<" - ";
+	}
+}
 //mostrar
 int main(){
 
