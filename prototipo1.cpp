@@ -30,4 +30,9 @@ void inOrden(Nodo *arbol)
 void PostOrden(nodo *arbol)
 //mostrar
 void mostrarArbol(nodo *arbol, int cont)
+
+int main(){
+    
+return 0;
+}
 //definicion
