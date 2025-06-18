@@ -23,7 +23,15 @@ Nodo *nuevoNodo(int valor) {
 void insertarnodo()
 
 //preorden
-
+void PreOrden(nodo *arbol){
+	if(arbol == NULL){
+		return ;
+	}else{
+		cout<<arbol->dato<<" - ";
+		PreOrden(arbol->izq);
+		PreOrden(arbol->der);
+	}
+}
 //inorden
 
 //postorden
