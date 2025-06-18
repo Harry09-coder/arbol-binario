@@ -19,6 +19,12 @@ Nodo *nuevoNodo(int valor) {
 }
 
 //prototipos de funciones
+void menu();
+Nodo *CrearNodo(int);
+void insertarNodo(Nodo *&,int);
+void mostrarArbol(Nodo *,int);
+bool busqueda(Nodo *,int);
+void preOrden(Nodo *arbol);
 //insertar
 void insertarnodo(nodo *& arbol, int n)
 
