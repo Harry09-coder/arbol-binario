@@ -87,4 +87,35 @@ void insertarnodo(nodo *& arbol, int n) {
         }
     }
 }
+//definicion de in-Orden
+void inOrden(Nodo *arbol){
+ if(arbol == NULL){
+  return;
+ }
+ else{
+  inOrden(arbol->izq);
+  cout<<arbol->dato<<" - ";
+  inOrden(arbol->der);
+ }
+}
+//definicion de Pre-Orden
+void PreOrden(nodo *arbol){
+	if(arbol == NULL){
+		return ;
+	}else{
+		cout<<arbol->dato<<" - ";
+		PreOrden(arbol->izq);
+		PreOrden(arbol->der);
+	}
+}
+//definicion de post-Orden
+void PostOrden(nodo *arbol){
+	if(arbol == NULL){
+		return ;
+	}else{
+		PostOrden(arbol->izq);
+		PostOrden(arbol->der);
+		cout<<arbol->dato<<" - ";
+	}
+}
 
