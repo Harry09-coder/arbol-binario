@@ -27,7 +27,13 @@ void insertarnodo(nodo *& arbol, int n)
 //preorden
 void PreOrden(nodo *arbol)
 //inorden
-void inOrden(Nodo *arbol)
+void inOrden(Nodo *arbol){
+	if (arbol != NULL){
+		inOrden(arbol->izq);
+		cout <<arbol->dato<< "";
+		inOrden(arbol->der);
+	}
+}
 //postorden
 void PostOrden(nodo *arbol)
 //mostrar
