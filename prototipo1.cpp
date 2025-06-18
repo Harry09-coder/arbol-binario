@@ -48,4 +48,18 @@ int main(){
 
 return 0;
 }
+//Funcion para mostrar el arbol completo
+void mostrarArbol(nodo *arbol, int cont){
+    if(arbol == NULL){//Saber si el arbol esta vacio.
+        return;
+    }
+    else{//Si no esta vacio.
+        mostrarArbol(arbol->der,cont+1);//imprimiendo lado derecho.
+        for(int i=0 ; i<cont ; i++){
+            cout<<"   ";
+        }
+        cout<<arbol->dato<<endl;
+        mostrarArbol(arbol->izq,cont+1);//imprimiendo lado izquierdo.
+    }
+}
 //definicion
