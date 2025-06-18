@@ -50,7 +50,7 @@ void menu() {
     do {
         cout << "\n--- MENU ---\n";
         cout << "1. Insertar nodo\n";
-        cout << "2. Mostrar arbol (InOrden)\n";
+        cout << "2. Mostrar arbol \n";
         cout << "3. Salir\n";
         cout << "Opcion: ";
         cin >> opcion;
@@ -59,11 +59,11 @@ void menu() {
             case 1:
                 cout << "Ingrese un numero: ";
                 cin >> dato;
-                insertarnodo(arbol, dato);
+                
                 break;
             case 2:
                 cout << "Contenido del arbol (InOrden): ";
-                mostrarInOrden(arbol);
+                
                 cout << endl;
                 break;
             case 3:
