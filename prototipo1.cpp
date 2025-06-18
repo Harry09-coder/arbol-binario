@@ -33,6 +33,17 @@ void PreOrden(nodo *arbol){
 	}
 }
 //inorden
+void inOrden(Nodo *arbol){
+ if(arbol == NULL){
+  return;
+ }
+ else{
+  inOrden(arbol->izq);
+  cout<<arbol->dato<<" - ";
+  inOrden(arbol->der);
+ }
+}
+
 
 //postorden
 
