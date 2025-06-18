@@ -42,3 +42,36 @@ int main(){
 return 0;
 }
 //definicion
+//menu
+void menu() {
+    nodo* arbol = NULL;
+    int opcion, dato;
+
+    do {
+        cout << "\n--- MENU ---\n";
+        cout << "1. Insertar nodo\n";
+        cout << "2. Mostrar arbol (InOrden)\n";
+        cout << "3. Salir\n";
+        cout << "Opcion: ";
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1:
+                cout << "Ingrese un numero: ";
+                cin >> dato;
+                insertarnodo(arbol, dato);
+                break;
+            case 2:
+                cout << "Contenido del arbol (InOrden): ";
+                mostrarInOrden(arbol);
+                cout << endl;
+                break;
+            case 3:
+                cout << "Saliendo del programa...\n";
+                break;
+            default:
+                cout << "Opcion invalida. Intente nuevamente.\n";
+        }
+
+    } while (opcion != 3);
+}
