@@ -2,7 +2,6 @@
 #include <string>
 using namespace std;
 
-// Estructura Persona
 struct Persona {
     int id;
     string nombre;
@@ -12,7 +11,7 @@ struct Persona {
     Persona* madre;
 };
 
-// Prototipos
+// Prototipos de funciones
 Persona* crearPersona(int id, string nombre, char genero, int generacion);
 Persona* buscarPersona(Persona* raiz, int id);
 void insertarPadreMadre(Persona* raiz, int hijoID, int id, string nombre, char genero);
@@ -25,7 +24,7 @@ void mostrarAncestros(Persona* p);
 bool eliminarPersona(Persona*& raiz, int id);
 void liberarArbol(Persona*& raiz);
 void menu();
-int validarID(); // Nueva funcion para validar ID
+int validarID();
 
 // Funcion principal
 int main() {
@@ -34,7 +33,20 @@ int main() {
     return 0;
 }
 
-// Crea una nueva persona
+// Validar ID positivo
+int validarID() {
+    int id;
+    do {
+        cout << "ID: ";
+        cin >> id;
+        if (id < 0) {
+            cout << "ID invalido. Debe ser un numero positivo.\n";
+        }
+    } while (id < 0);
+    return id;
+}
+
+// Implementacion de funciones
 Persona* crearPersona(int id, string nombre, char genero, int generacion) {
     Persona* p = new Persona;
     p->id = id;
@@ -46,7 +58,6 @@ Persona* crearPersona(int id, string nombre, char genero, int generacion) {
     return p;
 }
 
-// Busca una persona por ID
 Persona* buscarPersona(Persona* raiz, int id) {
     if (raiz == NULL) return NULL;
     if (raiz->id == id) return raiz;
@@ -57,7 +68,6 @@ Persona* buscarPersona(Persona* raiz, int id) {
     return buscarPersona(raiz->madre, id);
 }
 
-// Inserta padre o madre a un hijo
 void insertarPadreMadre(Persona* raiz, int hijoID, int id, string nombre, char genero) {
     Persona* hijo = buscarPersona(raiz, hijoID);
     if (hijo == NULL) {
@@ -96,7 +106,6 @@ void insertarPadreMadre(Persona* raiz, int hijoID, int id, string nombre, char g
     }
 }
 
-// Muestra el arbol
 void mostrarArbol(Persona* p, int espacio) {
     if (p == NULL) return;
     
@@ -110,7 +119,6 @@ void mostrarArbol(Persona* p, int espacio) {
     mostrarArbol(p->padre, espacio);
 }
 
-// Muestra los datos de una persona
 void mostrarFamilia(Persona* p) {
     if (p == NULL) {
         cout << "Persona no encontrada.\n";
@@ -123,7 +131,6 @@ void mostrarFamilia(Persona* p) {
     cout << "Madre: " << (p->madre ? p->madre->nombre : "Desconocida") << "\n";
 }
 
-// Recorridos
 void inorden(Persona* p) {
     if (p == NULL) return;
     inorden(p->padre);
@@ -145,7 +152,6 @@ void postorden(Persona* p) {
     cout << p->id << " - " << p->nombre << "\n";
 }
 
-// Muestra ancestros de una persona
 void mostrarAncestros(Persona* p) {
     if (p == NULL) {
         cout << "Persona no encontrada.\n";
@@ -162,13 +168,12 @@ void mostrarAncestros(Persona* p) {
     }
 }
 
-// Elimina una persona y sus ancestros
 bool eliminarPersona(Persona*& raiz, int id) {
     if (raiz == NULL) return false;
 
     if (raiz->id == id) {
-        liberarArbol(raiz->padre);
-        liberarArbol(raiz->madre);
+        eliminarPersona(raiz->padre, raiz->padre ? raiz->padre->id : -1);
+        eliminarPersona(raiz->madre, raiz->madre ? raiz->madre->id : -1);
         delete raiz;
         raiz = NULL;
         return true;
@@ -180,29 +185,16 @@ bool eliminarPersona(Persona*& raiz, int id) {
     return eliminarPersona(raiz->madre, id);
 }
 
-// Libera memoria del arbol
 void liberarArbol(Persona*& raiz) {
     if (raiz == NULL) return;
+    
     liberarArbol(raiz->padre);
     liberarArbol(raiz->madre);
+    
     delete raiz;
     raiz = NULL;
 }
 
-// Valida que el ID sea positivo
-int validarID() {
-    int id;
-    do {
-        cout << "Ingrese un ID (mayor a 0): ";
-        cin >> id;
-        if (id <= 0) {
-            cout << "Error: El ID debe ser mayor a cero.\n";
-        }
-    } while (id <= 0);
-    return id;
-}
-
-// Menu principal
 void menu() {
     Persona* raiz = NULL;
     int opcion, id, hijoID;
@@ -228,7 +220,7 @@ void menu() {
             case 1:
                 system("cls");
                 if (raiz != NULL) {
-                    cout << "Ya existe un descendiente principal (raiz).\n";
+                    cout << "Ya existe un descendiente principal.\n";
                     break;
                 }
                 id = validarID();
@@ -241,11 +233,13 @@ void menu() {
                     break;
                 }
                 raiz = crearPersona(id, nombre, genero, 1);
-                cout << "Raiz agregada correctamente.\n";
+                cout << "Raiz agregada.\n";
                 break;
 
             case 2:
+                cout << "ID del hijo: ";
                 hijoID = validarID();
+                cout << "ID del nuevo padre/madre: ";
                 id = validarID();
                 cin.ignore();
                 cout << "Nombre: "; getline(cin, nombre);
@@ -284,6 +278,7 @@ void menu() {
                 break;
 
             case 9:
+                cout << "ID a eliminar: ";
                 id = validarID();
                 if (id == (raiz ? raiz->id : -1)) {
                     liberarArbol(raiz);
@@ -297,7 +292,7 @@ void menu() {
 
             case 10:
                 liberarArbol(raiz);
-                cout << "Saliendo del programa arbol\n"; 
+                cout << "Saliendo...\n"; 
                 break;
 
             default:
